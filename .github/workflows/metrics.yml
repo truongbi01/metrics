@@ -1,8 +1,9 @@
 name: Metrics
+
 on:
   schedule:
-    - cron: "0 0 * * *"  # Mỗi ngày chạy 1 lần lúc 0h UTC
-  workflow_dispatch:      # Cho phép chạy thủ công
+    - cron: "0 17 * * *"  # Mỗi ngày chạy 0h theo giờ Việt Nam (UTC+7)
+  workflow_dispatch:        # Cho phép chạy thủ công từ giao diện GitHub
 
 jobs:
   github-metrics:
@@ -10,6 +11,9 @@ jobs:
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          filename: github-metrics.svg
           token: ${{ secrets.METRICS_TOKEN }}
+          user: truongbi01
+          filename: github-metrics.svg
           base: header, activity, community, repositories, metadata
+          config_timezone: Asia/Ho_Chi_Minh
+          debug: true
