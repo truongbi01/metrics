@@ -1,0 +1,15 @@
+name: Metrics
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Mỗi ngày chạy 1 lần lúc 0h UTC
+  workflow_dispatch:      # Cho phép chạy thủ công
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: github-metrics.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: header, activity, community, repositories, metadata
